@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irene Lin | Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&family=Noto+Sans+TC:wght@400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5849be;
+            --accent: #00b894;
+            --dark: #1e272e;
+            --light: #f5f6fa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover { color: var(--primary); }
+        .nav-link.active { color: var(--primary); font-weight: 700; }
+
+        .game-toggle-btn {
+            background: var(--dark);
+            color: #ffd700;
+            border: 2px solid #ffd700;
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+        }
+
+        .game-toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* --- Page Header --- */
+        .page-header {
+            padding: 120px 5% 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            font-size: 1.05rem;
+            color: #636e72;
+            line-height: 1.6;
+        }
+
+        .page-header .line {
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            margin: 16px 0 12px;
+            border-radius: 2px;
+        }
+
+        /* --- Category Section --- */
+        .category-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5% 60px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(108, 92, 231, 0.12);
+        }
+
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .category-icon.ai { background: rgba(108, 92, 231, 0.1); }
+        .category-icon.system { background: rgba(0, 184, 148, 0.1); }
+
+        .category-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .category-subtitle {
+            font-size: 0.85rem;
+            color: #b2bec3;
+            font-weight: 500;
+        }
+
+        /* --- Portfolio Cards --- */
+        .portfolio-list {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .portfolio-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+            display: flex;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+        }
+
+        .portfolio-img {
+            flex: 0 0 400px;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+
+        .portfolio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.4s ease;
+        }
+
+        .portfolio-card:hover .portfolio-img img {
+            transform: scale(1.03);
+        }
+
+        .portfolio-body {
+            flex: 1;
+            padding: 30px 36px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6px;
+        }
+
+        .portfolio-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .portfolio-date {
+            font-size: 0.82rem;
+            color: #b2bec3;
+            font-weight: 500;
+            white-space: nowrap;
+            margin-left: 16px;
+            margin-top: 4px;
+        }
+
+        .portfolio-role {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        /* Subsections within AI cards */
+        .portfolio-section-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #b2bec3;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+
+        .portfolio-section-label:first-of-type {
+            margin-top: 0;
+        }
+
+        .portfolio-desc {
+            font-size: 0.9rem;
+            color: #636e72;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .portfolio-list-items {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .portfolio-list-items li {
+            font-size: 0.88rem;
+            color: #636e72;
+            line-height: 1.55;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .portfolio-list-items li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 7px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 1px;
+        }
+
+        .portfolio-results li::before {
+            background: var(--accent);
+        }
+
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: gap 0.3s, color 0.3s;
+            margin-top: auto;
+            padding-top: 12px;
+        }
+
+        .portfolio-link:hover {
+            gap: 10px;
+            color: var(--primary-dark);
+        }
+
+        .portfolio-link:hover svg {
+            transform: translateX(3px);
+        }
+
+        .portfolio-link svg {
+            transition: transform 0.3s;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 30px 5%;
+            text-align: center;
+        }
+
+        .copyright {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
+            .nav-links { display: none; }
+
+            .portfolio-card { flex-direction: column; }
+            .portfolio-img { flex: none; height: 200px; min-height: auto; }
+            .portfolio-body { padding: 22px 18px; }
+            .portfolio-top { flex-direction: column; gap: 2px; }
+            .portfolio-date { margin-left: 0; }
+            .page-header h1 { font-size: 2rem; }
+            .category-header { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="綜合版履歷.html" class="logo">Irene Lin</a>
+        <div class="nav-links">
+            <a href="綜合版履歷.html#about" class="nav-link">About</a>
+            <a href="綜合版履歷.html#experience" class="nav-link">Experience</a>
+            <a href="綜合版履歷.html#projects" class="nav-link">Projects</a>
+            <a href="綜合版履歷.html#skills" class="nav-link">Skills</a>
+            <a href="portfolio.html" class="nav-link active">Portfolio</a>
+            <a href="綜合版履歷.html" class="game-toggle-btn">
+                <span>Game Mode</span> 👾
+            </a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Portfolio</h1>
+        <div class="line"></div>
+        <p>專案成就與交付實績，涵蓋 AI 企業解決方案、金融系統與平台建置。</p>
+    </div>
+
+    <!-- ==================== AI & Enterprise Projects ==================== -->
+    <div class="category-section">
+        <div class="category-header">
+            <div class="category-icon ai">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6c5ce7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M16 14a4 4 0 0 1 4 4v2H4v-2a4 4 0 0 1 4-4"/><line x1="12" y1="14" x2="12" y2="22"/></svg>
+            </div>
+            <div>
+                <div class="category-title">AI & Enterprise Projects</div>
+                <div class="category-subtitle">生成式 AI、智能客服、LLM 應用與企業級解決方案</div>
+            </div>
+        </div>
+
+        <div class="portfolio-list">
+
+            <!-- 南山人壽 -->
+            <div class="portfolio-card">
+                <div class="portfolio-img">
+                    <img src="專案成就圖片/南山人壽智能客服_手機版.png" alt="南山人壽智能客服">
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-top">
+                        <div class="portfolio-title">南山人壽｜智能客服系統</div>
+                        <div class="portfolio-date">2024</div>
+                    </div>
+                    <div class="portfolio-role">AI Chatbot Product Lead</div>
+                    <div class="portfolio-section-label">Background</div>
+                    <div class="portfolio-desc">金融保險客服對話複雜，需符合合規要求與高精準意圖辨識能力。擔任 AI Chatbot Product Owner，負責 NLU 設計與語料策略規劃。</div>
+                    <div class="portfolio-section-label">Core Contributions</div>
+                    <ul class="portfolio-list-items">
+                        <li>設計完整 NLU 流程架構（Intent / Entity / Dialogue Flow）</li>
+                        <li>建立 FAQ 語料庫與語意分類標準</li>
+                        <li>優化意圖辨識邏輯與回覆準確率</li>
+                        <li>串接企業內部系統與客服場景流程</li>
+                        <li>主導專案驗收與企業導入</li>
+                    </ul>
+                    <div class="portfolio-section-label">Results</div>
+                    <ul class="portfolio-list-items portfolio-results">
+                        <li>成功導入金融級智能客服解決方案</li>
+                        <li>建立可擴充語料管理與維運機制</li>
+                        <li>強化客服自動化回應效率與準確度</li>
+                    </ul>
+                    <a href="https://chatweb.nanshanlife.com.tw/?token=Vbj1Cnm8QK6HZzAsfIgC1aJFcMWG0HsmSpIL7%2BcjOkxjq3zVfnbTE5zHcPd50Hs11J%2BpWzdAYMqgt3FVUbLs6ePP6GLx7XkO4r0FT4ek0Lo6A4hZqxSC2VbUT2tQfcwf5p3vTKINgOv0luXjWGTI3onFOk2c%2FfuemZBsDhDljSQ%3D" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+                        前往查看
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 國泰私募 ICR -->
+            <div class="portfolio-card">
+                <div class="portfolio-img">
+                    <img src="專案成就圖片/國泰私募ICR.png" alt="國泰私募 ICR">
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-top">
+                        <div class="portfolio-title">國泰私募｜ICR 文件辨識專案</div>
+                        <div class="portfolio-date">2024</div>
+                    </div>
+                    <div class="portfolio-role">AI Solution PM</div>
+                    <div class="portfolio-section-label">Background</div>
+                    <div class="portfolio-desc">大量金融文件需結構化辨識與自動化處理。負責 ICR 解決方案規劃與模型整合驗證。</div>
+                    <div class="portfolio-section-label">Core Contributions</div>
+                    <ul class="portfolio-list-items">
+                        <li>設計 ICR 文件結構化識別流程</li>
+                        <li>整合 AI OCR / NLP 模型進行欄位抽取</li>
+                        <li>建立資料清洗與驗證邏輯</li>
+                        <li>與技術團隊協作優化辨識準確率</li>
+                        <li>對接企業端文件處理流程</li>
+                    </ul>
+                    <div class="portfolio-section-label">Results</div>
+                    <ul class="portfolio-list-items portfolio-results">
+                        <li>提升文件處理效率與資料結構化程度</li>
+                        <li>降低人工輸入與校對成本</li>
+                        <li>建立金融文件自動化處理模型</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SysTalk.VIKI -->
+            <div class="portfolio-card">
+                <div class="portfolio-img">
+                    <img src="專案成就圖片/VIKI_手機版.png" alt="SysTalk.VIKI">
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-top">
+                        <div class="portfolio-title">SysTalk.VIKI｜企業 AI 知識助理</div>
+                        <div class="portfolio-date">2025</div>
+                    </div>
+                    <div class="portfolio-role">AI Product & PoC Lead｜企業級 LLM × RAG 知識管理平台</div>
+                    <div class="portfolio-section-label">Core Contributions</div>
+                    <ul class="portfolio-list-items">
+                        <li>設計 RAG + LLM 檢索架構</li>
+                        <li>優化多格式文件向量化（含 .xlsx 結構化資料）</li>
+                        <li>應用 Few-shot / Context Engineering 提升回覆精準度</li>
+                        <li>推動 7+ 企業 PoC 驗證</li>
+                        <li>建立標準化 AI 驗證與導入流程</li>
+                    </ul>
+                    <div class="portfolio-section-label">Results</div>
+                    <ul class="portfolio-list-items portfolio-results">
+                        <li>加速企業 LLM 導入決策</li>
+                        <li>建立可複製 AI 商業驗證模型</li>
+                        <li>強化企業知識檢索準確率與使用體驗</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SysTalk.Audit -->
+            <div class="portfolio-card">
+                <div class="portfolio-img">
+                    <img src="專案成就圖片/Audit_手機版.png" alt="SysTalk.Audit">
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-top">
+                        <div class="portfolio-title">SysTalk.Audit｜生成式 AI 語音質檢</div>
+                        <div class="portfolio-date">2025</div>
+                    </div>
+                    <div class="portfolio-role">Product Owner｜金融級 STT × LLM 語音品質檢核系統</div>
+                    <div class="portfolio-section-label">Core Contributions</div>
+                    <ul class="portfolio-list-items">
+                        <li>主導 0→1 產品打造</li>
+                        <li>整合 STT/TTS + LLM 技術</li>
+                        <li>設計多主題評分模型與動態 Prompt Orchestration</li>
+                        <li>建立 AI 質檢管理後台</li>
+                        <li>導入 RAG 強化合規條款比對</li>
+                        <li>推動 5+ 企業金融 PoC 落地</li>
+                    </ul>
+                    <div class="portfolio-section-label">Results</div>
+                    <ul class="portfolio-list-items portfolio-results">
+                        <li>建立金融語音質檢標準化模型</li>
+                        <li>加速 AI 從驗證走向營運</li>
+                        <li>串聯演算法團隊與商業端決策</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==================== System & Platform Projects ==================== -->
+    <div class="category-section">
+        <div class="category-header">
+            <div class="category-icon system">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00b894" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div>
+                <div class="category-title">System & Platform Projects</div>
+                <div class="category-subtitle">企業官網、電商平台、APP 與系統整合</div>
+            </div>
+        </div>
+
+        <div class="portfolio-list">
+
+            <!-- 華南金資產 -->
+            <div class="portfolio-card">
+                <div class="portfolio-img">
+                    <img src="專案成就圖片/華南金資產.png" alt="華南金資產官網">
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-top">
+                        <div class="portfolio-title">華南金資產｜企業形象官網建置</div>
+                        <div class="portfolio-date">2021/07 – 2022/12</div>
+                    </div>
+                    <ul class="portfolio-list-items">
+                        <li>建立 CMS 上稿管理系統</li>
+                        <li>設計物件管理（出售 / 出租 / 代標）</li>
+                        <li>四大業務服務子站管理</li>
+                        <li>RWD 響應式設計</li>
+                        <li>強化企業品牌與資訊管理效率</li>
+                    </ul>
+                    <a href="https://www.hnamc.com.tw/" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+                        前往查看
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 第一金證券 -->
+            <div class="portfolio-card">
+                <div class="portfolio-img">
+                    <img src="專案成就圖片/第一金證券.png" alt="第一金證券官網">
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-top">
+                        <div class="portfolio-title">第一金證券｜企業官網</div>
+                        <div class="portfolio-date">2021/08 – 2022/12</div>
+                    </div>
+                    <ul class="portfolio-list-items">
+                        <li>CMS 內容管理架構設計</li>
+                        <li>無障礙雙A專區規劃</li>
+                        <li>動態文章與排序管理</li>
+                        <li>API 串接與 iframe 整合</li>
+                    </ul>
+                    <a href="https://www.firstsec.com.tw/WebTour.html" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+                        前往查看
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 全聯食譜 -->
+            <div class="portfolio-card">
+                <div class="portfolio-img">
+                    <img src="專案成就圖片/全聯食譜.png" alt="全聯食譜平台">
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-top">
+                        <div class="portfolio-title">全聯食譜平台</div>
+                    </div>
+                    <ul class="portfolio-list-items">
+                        <li>CMS 食譜投稿管理</li>
+                        <li>食材資料庫匯入</li>
+                        <li>SSO 串接 PXPAY</li>
+                        <li>收藏與社群分享機制</li>
+                        <li>評分與互動功能設計</li>
+                    </ul>
+                    <a href="https://pxrecipe.pxmart.com.tw/" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+                        前往查看
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 柏瑞投信 -->
+            <div class="portfolio-card">
+                <div class="portfolio-img">
+                    <img src="專案成就圖片/柏瑞投信.png" alt="柏瑞投信官網">
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-top">
+                        <div class="portfolio-title">柏瑞投信｜投信官網維護</div>
+                        <div class="portfolio-date">2021/07 – 2023/07</div>
+                    </div>
+                    <ul class="portfolio-list-items">
+                        <li>投信基金 CMS 管理</li>
+                        <li>基金資料結構化匯入</li>
+                        <li>說明會與動態頁面管理</li>
+                        <li>三方資料串接窗口</li>
+                    </ul>
+                    <a href="https://www.pinebridge.com.tw/" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+                        前往查看
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 元大香港 -->
+            <div class="portfolio-card">
+                <div class="portfolio-img">
+                    <img src="專案成就圖片/元大香港客服專區APP.png" alt="元大香港 APP">
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-top">
+                        <div class="portfolio-title">元大香港｜客服專區 APP</div>
+                        <div class="portfolio-date">2022/10 – 2023/07</div>
+                    </div>
+                    <ul class="portfolio-list-items">
+                        <li>原生 APP + WebView 架構</li>
+                        <li>KYC / 2FA 金融驗證串接</li>
+                        <li>資金管理與金融商品轉券</li>
+                        <li>指定受款銀行與資料變更流程</li>
+                        <li>金融級流程安全設計</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 杏豐 -->
+            <div class="portfolio-card">
+                <div class="portfolio-img">
+                    <img src="專案成就圖片/杏豐-健康智慧APP.png" alt="杏豐健康智慧 APP">
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-top">
+                        <div class="portfolio-title">杏豐｜健康智慧 APP</div>
+                        <div class="portfolio-date">2021/12 – 2022/12</div>
+                    </div>
+                    <ul class="portfolio-list-items">
+                        <li>串接 6 台醫療硬體設備</li>
+                        <li>體脂 / 血壓 / InBody 數據整合</li>
+                        <li>CMS 管理設備與會員</li>
+                        <li>數據圖表化與報表分析</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p class="copyright">&copy; 2025 Irene Lin. Created with AI & Passion.</p>
+    </footer>
+
+</body>
+</html>
