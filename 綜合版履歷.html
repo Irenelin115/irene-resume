@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irene Lin | Product Manager & AI Specialist</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&family=Noto+Sans+TC:wght@400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <meta name="description" content="Irene Lin - 5年經驗產品經理，專注於 AI 產品落地與驗證 (SysTalk, RAG, PoC)。">
+    
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5849be;
+            --accent: #00b894;
+            --accent-glow: #55efc4;
+            --dark: #1e272e;
+            --light: #f5f6fa;
+            --glass: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --gradient-bg: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover { color: var(--primary); }
+
+        .game-toggle-btn {
+            background: var(--dark);
+            color: #ffd700;
+            border: 2px solid #ffd700;
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+        }
+
+        .game-toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: #2d3436;
+        }
+
+        /* --- Main Content Layout --- */
+        #resume-view {
+            transition: opacity 0.5s ease;
+        }
+
+        section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- Hero Carousel --- */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            padding: 70px 0 0 0;
+            max-width: 100%;
+            width: 100vw;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 70px);
+        }
+
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 5%;
+            position: relative;
+        }
+
+        .carousel-slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.06;
+            pointer-events: none;
+        }
+
+        .slide-1 {
+            background: radial-gradient(circle at 50% 50%, rgba(108, 92, 231, 0.12) 0%, rgba(245,246,250,1) 70%);
+        }
+
+        .slide-2 {
+            background: radial-gradient(circle at 30% 60%, rgba(0, 184, 148, 0.1) 0%, rgba(245,246,250,1) 70%);
+        }
+
+        /* slide-3 bg is overridden in the Audit Showcase section below */
+
+        .slide-content {
+            z-index: 2;
+            max-width: 700px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+        }
+
+        .carousel-slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .avatar-frame {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            position: relative;
+        }
+
+        .avatar-frame img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            background: #fff;
+        }
+
+        .slide-greeting {
+            font-size: 1.2rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .slide-subtitle {
+            font-size: 1.15rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .slide-desc {
+            font-size: 1.05rem;
+            color: #636e72;
+            line-height: 1.8;
+            margin-bottom: 28px;
+        }
+
+        .slide-highlight {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .slide-highlight-label {
+            font-size: 1.1rem;
+            color: #636e72;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        /* --- Slide 3: Audit Showcase --- */
+        .slide-3 {
+            background:
+                radial-gradient(ellipse at 50% 20%, rgba(138, 120, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(120, 160, 255, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 10% 70%, rgba(162, 155, 254, 0.08) 0%, transparent 35%),
+                linear-gradient(135deg, #1e1a3a 0%, #2a2558 35%, #332f5e 65%, #3d3873 100%) !important;
+            align-items: flex-start !important;
+            overflow-y: auto;
+            padding-top: 40px !important;
+            padding-bottom: 60px !important;
+            position: relative;
+        }
+
+        /* Subtle grid pattern overlay */
+        .slide-3::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(108, 92, 231, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(108, 92, 231, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .slide-3 .slide-content {
+            max-width: 90%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            text-align: center;
+            margin: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .s3-top {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .s3-eyebrow {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .s3-headline {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #e8d5a3, #c9b578, #dfc98a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.35;
+        }
+
+        .s3-sub {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.7;
+        }
+
+        /* Impact metrics row */
+        .s3-metrics {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .s3-metric {
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.08), rgba(99, 140, 255, 0.06));
+            border: 1px solid rgba(108, 92, 231, 0.18);
+            border-radius: 14px;
+            padding: 22px 20px;
+            min-width: 150px;
+            flex: 1;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+        }
+
+        .s3-metric:hover {
+            box-shadow: 0 0 24px rgba(108, 92, 231, 0.15);
+            border-color: rgba(108, 92, 231, 0.35);
+        }
+
+        .carousel-slide.active .s3-metric:nth-child(1) { transition-delay: 0.2s; }
+        .carousel-slide.active .s3-metric:nth-child(2) { transition-delay: 0.35s; }
+        .carousel-slide.active .s3-metric:nth-child(3) { transition-delay: 0.5s; }
+        .carousel-slide.active .s3-metric:nth-child(4) { transition-delay: 0.65s; }
+
+        .carousel-slide.active .s3-metric {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .s3-metric-num {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #e8d5a3, #c9b578);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .s3-metric-label {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.45);
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+
+        /* Problem → Solution → Result */
+        .s3-psr {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .s3-psr-card {
+            background: linear-gradient(160deg, rgba(108, 92, 231, 0.06), rgba(255,255,255,0.02));
+            border: 1px solid rgba(108, 92, 231, 0.12);
+            border-radius: 14px;
+            padding: 22px 18px;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+        }
+
+        .s3-psr-card:hover {
+            box-shadow: 0 0 20px rgba(108, 92, 231, 0.1);
+        }
+
+        .carousel-slide.active .s3-psr-card:nth-child(1) { transition-delay: 0.3s; }
+        .carousel-slide.active .s3-psr-card:nth-child(2) { transition-delay: 0.5s; }
+        .carousel-slide.active .s3-psr-card:nth-child(3) { transition-delay: 0.7s; }
+
+        .carousel-slide.active .s3-psr-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .s3-psr-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .s3-psr-icon.icon-pain {
+            background: rgba(178, 152, 112, 0.12);
+        }
+
+        .s3-psr-icon.icon-solution {
+            background: rgba(108, 92, 231, 0.12);
+        }
+
+        .s3-psr-icon.icon-result {
+            background: rgba(99, 140, 255, 0.12);
+        }
+
+        .s3-psr-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .s3-psr-title.pain { color: #b29870; }
+        .s3-psr-title.solution { color: #a29bfe; }
+        .s3-psr-title.result { color: #74b9ff; }
+
+        .s3-psr-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .s3-psr-list li {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.48);
+            line-height: 1.5;
+            padding-left: 14px;
+            position: relative;
+        }
+
+        .s3-psr-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 7px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(108, 92, 231, 0.4);
+        }
+
+        .s3-psr-card:nth-child(3) .s3-psr-list li::before {
+            background: rgba(99, 140, 255, 0.5);
+        }
+
+        /* Architecture mini flow */
+        .s3-arch {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+
+        .s3-arch-node {
+            background: rgba(108, 92, 231, 0.12);
+            border: 1px solid rgba(108, 92, 231, 0.25);
+            color: rgba(255,255,255,0.8);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .s3-arch-node:hover {
+            background: rgba(108, 92, 231, 0.25);
+            border-color: rgba(108, 92, 231, 0.5);
+            box-shadow: 0 0 16px rgba(108, 92, 231, 0.2);
+            color: #fff;
+        }
+
+        .s3-arch-arrow {
+            color: rgba(108, 92, 231, 0.35);
+            font-size: 0.85rem;
+            padding: 0 10px;
+        }
+
+        /* Glow animation for arch nodes */
+        @keyframes archGlow {
+            0%, 100% { box-shadow: none; border-color: rgba(108, 92, 231, 0.25); }
+            50% { box-shadow: 0 0 12px rgba(108, 92, 231, 0.2); border-color: rgba(108, 92, 231, 0.45); }
+        }
+
+        .carousel-slide.active .s3-arch-node:nth-child(1) { animation: archGlow 3s ease 0.5s infinite; }
+        .carousel-slide.active .s3-arch-node:nth-child(3) { animation: archGlow 3s ease 1.0s infinite; }
+        .carousel-slide.active .s3-arch-node:nth-child(5) { animation: archGlow 3s ease 1.5s infinite; }
+        .carousel-slide.active .s3-arch-node:nth-child(7) { animation: archGlow 3s ease 2.0s infinite; }
+
+        /* Closing statement */
+        .s3-closing {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.35);
+            font-style: italic;
+            line-height: 1.7;
+            border-top: 1px solid rgba(108, 92, 231, 0.1);
+            padding-top: 18px;
+        }
+
+        .s3-closing strong {
+            color: rgba(255,255,255,0.65);
+            font-style: normal;
+        }
+
+        .slide-3 .tag-pill {
+            background: rgba(108, 92, 231, 0.1);
+            color: #a29bfe;
+            border-color: rgba(108, 92, 231, 0.2);
+        }
+
+        /* Slide 2: Split layout */
+        .slide-2 .slide-content {
+            max-width: 1100px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            text-align: left;
+        }
+
+        .slide-2-left {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .slide-2-right {
+            flex: 0 0 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Flow card styles */
+        .flow-card {
+            background: white;
+            border-radius: 14px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+            width: 100%;
+            position: relative;
+            border-left: 4px solid var(--primary);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .carousel-slide.active .flow-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .carousel-slide.active .flow-card:nth-child(1) { transition-delay: 0.3s; }
+        .carousel-slide.active .flow-card:nth-child(3) { transition-delay: 0.5s; }
+        .carousel-slide.active .flow-card:nth-child(5) { transition-delay: 0.7s; }
+
+        .flow-card:nth-child(3) {
+            border-left-color: var(--accent);
+        }
+
+        .flow-card:nth-child(5) {
+            border-left-color: #fdcb6e;
+        }
+
+        .flow-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.4rem;
+        }
+
+        .flow-icon.icon-search { background: rgba(108, 92, 231, 0.1); }
+        .flow-icon.icon-poc { background: rgba(0, 184, 148, 0.1); }
+        .flow-icon.icon-launch { background: rgba(253, 203, 110, 0.15); }
+
+        .flow-card-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .flow-card-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        .flow-card-desc {
+            font-size: 0.85rem;
+            color: #636e72;
+            line-height: 1.4;
+        }
+
+        /* Connector line between cards */
+        .flow-connector {
+            width: 2px;
+            height: 28px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .flow-connector::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            border-radius: 1px;
+        }
+
+        .flow-connector::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 6px solid var(--accent);
+        }
+
+        .tag-cloud {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .tag-pill {
+            background: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(108, 92, 231, 0.1);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        /* Carousel Controls */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(255,255,255,0.85);
+            border: 1px solid rgba(108, 92, 231, 0.15);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--primary);
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .carousel-arrow:hover {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 6px 20px rgba(108, 92, 231, 0.3);
+        }
+
+        .carousel-arrow.prev { left: 20px; }
+        .carousel-arrow.next { right: 20px; }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(108, 92, 231, 0.2);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0;
+        }
+
+        .carousel-dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(108, 92, 231, 0.4);
+        }
+
+        /* Progress bar for auto-play */
+        .carousel-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: var(--primary);
+            z-index: 10;
+            transition: width 0.1s linear;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(108, 92, 231, 0.4);
+            background: var(--primary-dark);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(108, 92, 231, 0.05);
+        }
+
+        /* --- Stats Grid --- */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: -50px;
+            padding-bottom: 50px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .stat-box:hover { transform: translateY(-5px); }
+
+        .stat-num {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #636e72;
+            font-weight: 500;
+        }
+
+        /* --- Section Titles --- */
+        .section-header {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+        }
+
+        .section-header .line {
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        /* --- Experience (Modern Timeline) --- */
+        .timeline-wrapper {
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid rgba(108, 92, 231, 0.2);
+        }
+
+        .exp-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .exp-card::before {
+            content: '';
+            position: absolute;
+            left: -39px;
+            top: 30px;
+            width: 16px;
+            height: 16px;
+            background: var(--light);
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .role-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .company-name {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .exp-date {
+            background: rgba(108, 92, 231, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .exp-desc {
+            color: #636e72;
+            line-height: 1.7;
+        }
+
+        /* --- Projects Grid --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border: 1px solid rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-color-bar {
+            height: 8px;
+            background: var(--primary);
+        }
+
+        .project-content {
+            padding: 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .project-subtitle {
+            font-size: 0.9rem;
+            color: #b2bec3;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+            padding-top: 20px;
+        }
+
+        .tech-tag {
+            font-size: 0.75rem;
+            background: var(--light);
+            padding: 4px 10px;
+            border-radius: 4px;
+            color: #636e72;
+            font-weight: 600;
+        }
+
+        /* --- Skills Section --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-group h3 {
+            margin-bottom: 20px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-item {
+            background: white;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .skill-name { font-weight: 500; }
+        .skill-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* --- Contact / Footer --- */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 5% 30px;
+            text-align: center;
+        }
+
+        .contact-box {
+            background: rgba(255,255,255,0.1);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            padding: 40px;
+            border-radius: 16px;
+            backdrop-filter: blur(5px);
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin: 0 15px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .contact-link:hover { color: var(--accent); }
+
+        .copyright {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+        }
+
+        /* --- GAME MODE STYLES (Hidden by default) --- */
+        #game-view {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #0f0f23;
+            z-index: 2000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            z-index: 2100;
+        }
+
+        .game-close-btn:hover { background: rgba(255,255,255,0.1); }
+        
+        canvas {
+            box-shadow: 0 0 50px rgba(108, 92, 231, 0.3);
+            max-width: 100%;
+            border: 4px solid #ffd700;
+        }
+
+        .game-ui {
+            font-family: 'Press Start 2P', cursive;
+            color: #ffd700;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        .game-controls-hint {
+            color: #888;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            font-family: monospace;
+        }
+
+        .achievement-toast {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-30px) scale(0.9);
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 50%, #ffd700 100%);
+            color: #1a1a2e;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-family: 'Noto Sans TC', 'Press Start 2P', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            z-index: 2200;
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            text-align: center;
+            box-shadow: 0 6px 30px rgba(255,215,0,0.5), 0 0 60px rgba(255,165,0,0.3), inset 0 1px 0 rgba(255,255,255,0.4);
+            line-height: 2;
+            white-space: nowrap;
+            border: 2px solid rgba(255,255,255,0.5);
+            letter-spacing: 0.5px;
+        }
+
+        .achievement-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0) scale(1);
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .slide-highlight { font-size: 3rem; }
+            .carousel-arrow { width: 36px; height: 36px; font-size: 0.9rem; }
+            .carousel-arrow.prev { left: 10px; }
+            .carousel-arrow.next { right: 10px; }
+            .carousel-slide { padding: 40px 15px; }
+            .slide-2 .slide-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+            .slide-2-left .tag-cloud { justify-content: center; }
+            .slide-2-right { flex: none; width: 100%; max-width: 320px; }
+            .s3-psr { grid-template-columns: 1fr; gap: 12px; }
+            .s3-metrics { gap: 10px; }
+            .s3-metric { min-width: 110px; padding: 14px 12px; }
+            .s3-metric-num { font-size: 1.3rem; }
+            .s3-headline { font-size: 1.5rem; }
+            .s3-arch-node { padding: 6px 12px; font-size: 0.75rem; }
+            .s3-arch-arrow { padding: 0 6px; }
+            .timeline-wrapper { padding-left: 20px; }
+            .exp-card::before { left: -28px; width: 12px; height: 12px; }
+            .game-toggle-btn span { display: none; }
+            .game-toggle-btn::after { content: '🎮'; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="resume-view">
+        
+        <nav class="navbar">
+            <a href="#" class="logo">Irene Lin</a>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="portfolio.html" class="nav-link">Portfolio</a>
+                <button class="game-toggle-btn" onclick="toggleGameMode(true)">
+                    <span>Game Mode</span> 👾
+                </button>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="carousel">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Slide 1: Who I Am -->
+                    <div class="carousel-slide slide-1 active">
+                        <div class="slide-content">
+                            <div class="avatar-frame">
+                                <img src="avatar.jpg" alt="Irene Lin" onerror="this.src='https://ui-avatars.com/api/?name=Irene+Lin&background=6c5ce7&color=fff&size=200'">
+                            </div>
+                            <div class="slide-greeting">Hi, I'm Irene.</div>
+                            <h1>Product Manager / Product Owner</h1>
+                            <div class="slide-subtitle">AI Products</div>
+                            <div class="slide-desc">專注於企業級 LLM 應用與 0→1 產品打造的 AI 產品負責人</div>
+                            <div class="tag-cloud">
+                                <span class="tag-pill">#AI產品</span>
+                                <span class="tag-pill">#LLM應用</span>
+                                <span class="tag-pill">#0到1打造</span>
+                            </div>
+                            <div class="hero-actions">
+                                <a href="#contact" class="btn btn-primary">Contact Me</a>
+                                <button class="btn btn-outline" onclick="toggleGameMode(true)">Play Resume 🎮</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: What I Do -->
+                    <div class="carousel-slide slide-2">
+                        <div class="slide-content">
+                            <div class="slide-2-left">
+                                <h1>從模糊需求到商業落地</h1>
+                                <div class="slide-subtitle">將業務痛點轉化為可落地的 AI 解決方案</div>
+                                <div class="slide-desc">擅長推動 PoC 驗證至商業導入，兼具技術理解與商業思維。<br>串聯演算法團隊、業務與管理層，加速產品化進程。</div>
+                                <div class="tag-cloud">
+                                    <span class="tag-pill">#商業落地</span>
+                                    <span class="tag-pill">#跨部門整合</span>
+                                    <span class="tag-pill">#金融科技</span>
+                                </div>
+                            </div>
+                            <div class="slide-2-right">
+                                <div class="flow-card">
+                                    <div class="flow-icon icon-search">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6c5ce7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                    </div>
+                                    <div class="flow-card-text">
+                                        <div class="flow-card-title">需求探索</div>
+                                        <div class="flow-card-desc">深入場域，挖掘業務痛點與核心需求</div>
+                                    </div>
+                                </div>
+                                <div class="flow-connector"></div>
+                                <div class="flow-card">
+                                    <div class="flow-icon icon-poc">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00b894" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                    </div>
+                                    <div class="flow-card-text">
+                                        <div class="flow-card-title">PoC 驗證</div>
+                                        <div class="flow-card-desc">快速原型驗證技術可行性與商業價值</div>
+                                    </div>
+                                </div>
+                                <div class="flow-connector"></div>
+                                <div class="flow-card">
+                                    <div class="flow-icon icon-launch">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f39c12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L15 22l-4-9-9-4z"/></svg>
+                                    </div>
+                                    <div class="flow-card-text">
+                                        <div class="flow-card-title">商業導入</div>
+                                        <div class="flow-card-desc">規模化落地，整合營運與持續優化</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Audit Showcase -->
+                    <div class="carousel-slide slide-3">
+                        <div class="slide-content">
+                            <!-- Hero area -->
+                            <div class="s3-top">
+                                <div class="s3-eyebrow">SysTalk.Audit &mdash; AI Voice Quality Assurance</div>
+                                <div class="s3-headline">5+ Enterprise AI PoCs<br>Delivered Within 6 Months</div>
+                                <div class="s3-sub">
+                                    主導企業級生成式 AI 語音質檢產品 0→1 落地<br>
+                                    串聯演算法團隊 &times; 業務單位 &times; 金融客戶管理層，加速 AI 從 PoC 驗證走向實際營運
+                                </div>
+                            </div>
+
+                            <!-- Impact metrics -->
+                            <div class="s3-metrics">
+                                <div class="s3-metric">
+                                    <span class="s3-metric-num">5+</span>
+                                    <div class="s3-metric-label">企業級金融 PoC<br>半年內落地</div>
+                                </div>
+                                <div class="s3-metric">
+                                    <span class="s3-metric-num">0→1</span>
+                                    <div class="s3-metric-label">AI 語音質檢產品<br>完整打造</div>
+                                </div>
+                                <div class="s3-metric">
+                                    <span class="s3-metric-num">STT+LLM</span>
+                                    <div class="s3-metric-label">語意檢核精準度<br>技術整合</div>
+                                </div>
+                                <div class="s3-metric">
+                                    <span class="s3-metric-num">Multi</span>
+                                    <div class="s3-metric-label">多主題評分框架<br>金融合規場景</div>
+                                </div>
+                            </div>
+
+                            <!-- Problem → Solution → Result -->
+                            <div class="s3-psr">
+                                <div class="s3-psr-card">
+                                    <div class="s3-psr-icon icon-pain">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b29870" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                    </div>
+                                    <div class="s3-psr-title pain">Pain Points</div>
+                                    <ul class="s3-psr-list">
+                                        <li>金融客服錄音人工抽檢效率低</li>
+                                        <li>合規檢核標準複雜且主觀</li>
+                                        <li>無法規模化分析語音品質</li>
+                                    </ul>
+                                </div>
+                                <div class="s3-psr-card">
+                                    <div class="s3-psr-icon icon-solution">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a29bfe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                    </div>
+                                    <div class="s3-psr-title solution">My Solution</div>
+                                    <ul class="s3-psr-list">
+                                        <li>設計多主題評分模型</li>
+                                        <li>建立動態 Prompt Orchestration</li>
+                                        <li>整合 STT + LLM 語意理解</li>
+                                        <li>導入 RAG 強化規範比對</li>
+                                    </ul>
+                                </div>
+                                <div class="s3-psr-card">
+                                    <div class="s3-psr-icon icon-result">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#74b9ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </div>
+                                    <div class="s3-psr-title result">Results</div>
+                                    <ul class="s3-psr-list">
+                                        <li>半年內完成 5+ 企業驗證</li>
+                                        <li>建立 AI 金融質檢標準模型</li>
+                                        <li>加速產品化與市場驗證</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Architecture mini flow -->
+                            <div class="s3-arch">
+                                <span class="s3-arch-node">STT</span>
+                                <span class="s3-arch-arrow">→</span>
+                                <span class="s3-arch-node">LLM</span>
+                                <span class="s3-arch-arrow">→</span>
+                                <span class="s3-arch-node">RAG</span>
+                                <span class="s3-arch-arrow">→</span>
+                                <span class="s3-arch-node">Scoring</span>
+                            </div>
+
+                            <!-- Tags -->
+                            <div class="tag-cloud" style="margin-bottom: 0;">
+                                <span class="tag-pill">#GenAI</span>
+                                <span class="tag-pill">#LLM落地</span>
+                                <span class="tag-pill">#EnterpriseAI</span>
+                                <span class="tag-pill">#金融科技</span>
+                            </div>
+
+                            <!-- Closing -->
+                            <div class="s3-closing">
+                                <strong>I build AI products that move beyond experimentation</strong> &mdash;<br>
+                                turning LLM capabilities into enterprise-ready solutions.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arrows -->
+                <button class="carousel-arrow prev" onclick="moveSlide(-1)">&#10094;</button>
+                <button class="carousel-arrow next" onclick="moveSlide(1)">&#10095;</button>
+
+                <!-- Dots -->
+                <div class="carousel-dots">
+                    <button class="carousel-dot active" onclick="goToSlide(0)"></button>
+                    <button class="carousel-dot" onclick="goToSlide(1)"></button>
+                    <button class="carousel-dot" onclick="goToSlide(2)"></button>
+                </div>
+
+                <!-- Progress bar -->
+                <div class="carousel-progress" id="carouselProgress"></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <span class="stat-num">5+</span>
+                    <span class="stat-label">Years Exp.</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num">10+</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num">5+</span>
+                    <span class="stat-label">PoC Delivery</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num">2</span>
+                    <span class="stat-label">AI Products (0-1)</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="section-header">
+                <h2>About Me</h2>
+                <div class="line"></div>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center; line-height: 1.8; color: #636e72;">
+                <p style="margin-bottom: 20px;">
+                    擁有 <strong>4-5 年產品與專案管理經驗</strong>，目前專注於 AI 產品的研發、驗證與實際落地。
+                    擅長以市場與場域需求為起點，將模糊需求轉化為可執行的產品方案，並推動 PoC 成功導入實際營運。
+                </p>
+                <p>
+                    曾以 Product Owner 身分，完整負責 <strong>產品規劃 × 跨部門協作 × PoC 提案</strong>。
+                    具備跨域整合能力，能在高不確定性與高壓環境下，持續推進產品前進。
+                </p>
+            </div>
+        </section>
+
+        <section id="experience" style="background: white;">
+            <div class="section-header">
+                <h2>Experience</h2>
+                <div class="line"></div>
+                <p style="max-width: 700px; margin: 15px auto 0; color: #636e72; font-size: 1rem; line-height: 1.6; font-style: italic;">
+                    AI Product Lead specializing in enterprise LLM commercialization, bridging technical feasibility and market adoption across regulated industries.
+                </p>
+            </div>
+            <div class="timeline-wrapper">
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <div class="role-title">Product Manager</div>
+                            <div class="company-name">昕力資訊 TPI Software</div>
+                            <div style="font-size: 0.85rem; color: #636e72; margin-top: 4px; font-weight: 500;">AI Product Owner｜Enterprise LLM Solutions</div>
+                        </div>
+                        <span class="exp-date">2023/08 – Present</span>
+                    </div>
+                    <ul class="exp-desc" style="padding-left: 20px;">
+                        <li>主導 <strong>SysTalk.Audit</strong> 生成式 AI 語音質檢產品 0→1 打造，整合 STT + LLM，設計多主題評分模型與動態 Prompt Orchestration 架構，半年內成功推進 <strong>5+ 金融企業 PoC</strong>，建立公司 AI 產品市場信心。</li>
+                        <li>擔任企業級 LLM 商業驗證負責人，推動 <strong>SysTalk.VIKI</strong> 於 7+ 企業客戶完成 PoC 導入，建立標準化 AI 驗證流程，加速決策週期。</li>
+                        <li>優化 RAG 架構與檢索策略，強化多格式文件向量化（含 .xlsx 結構化資料），提升知識檢索精準度與可用性。</li>
+                        <li>負責產品 Roadmap 與市場定位，協調演算法團隊、業務單位與管理層，將 AI 技術轉化為可商業化解決方案。</li>
+                        <li>擔任 Presale 技術橋樑，對接企業高階主管與技術窗口，推動 AI 從實驗階段走向營運場景。</li>
+                    </ul>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <div class="role-title">Project Manager</div>
+                            <div class="company-name">新達科技 Shinda Technology</div>
+                            <div style="font-size: 0.85rem; color: #636e72; margin-top: 4px; font-weight: 500;">Multi-Industry System Delivery Lead</div>
+                        </div>
+                        <span class="exp-date">2021/07 – 2023/07</span>
+                    </div>
+                    <ul class="exp-desc" style="padding-left: 20px;">
+                        <li>獨立負責 <strong>7+ 客製化企業專案</strong>與 3 起高風險專案救火，涵蓋金融 CMS、餐飲 CRM、B2B/B2C 票券系統與行銷管理平台，全數成功交付驗收。</li>
+                        <li>從需求訪談、SOW/SRS 制定、WBS 排程到上線驗收，完整掌控專案生命週期與變更風險管理。</li>
+                        <li>在跨部門協作（RD / SA / 設計 / 客戶）環境下，穩定控管範疇變更（CR）與資源調度，確保時程與品質雙達標。</li>
+                        <li>建立標準化測試與驗收流程，提升交付品質與客戶信任度。</li>
+                    </ul>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <div class="role-title">企業培訓專案協作</div>
+                            <div class="company-name">澤鈺智庫</div>
+                        </div>
+                        <span class="exp-date">2019/08 – 2020/04</span>
+                    </div>
+                    <ul class="exp-desc" style="padding-left: 20px;">
+                        <li>協助規劃企業內訓專案，對接 OPPO、國泰世華銀行、元大銀行等企業窗口，負責商業洽談與課程落地流程安排。</li>
+                        <li>參與企業高階管理層內訓課程，培養商業簡報與跨產業溝通能力。</li>
+                        <li>獨立完成結案報告與專案流程文件，建立早期專案管理基礎。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="section-header">
+                <h2>Featured Projects</h2>
+                <div class="line"></div>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-color-bar" style="background: #6c5ce7;"></div>
+                    <div class="project-content">
+                        <div class="project-title">SysTalk.Audit</div>
+                        <div class="project-subtitle">AI 語音質檢系統 (SaaS/On-prem)</div>
+                        <p style="color: #636e72; font-size: 0.95rem; margin-bottom: 20px;">
+                            解決金融與客服中心合規檢查痛點，利用 STT 與 Gen AI 技術自動化質檢流程。
+                        </p>
+                        <div class="project-tags">
+                            <span class="tech-tag">STT (Speech-to-Text)</span>
+                            <span class="tech-tag">Gen AI</span>
+                            <span class="tech-tag">Product Strategy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-color-bar" style="background: #00b894;"></div>
+                    <div class="project-content">
+                        <div class="project-title">SysTalk.VIKI</div>
+                        <div class="project-subtitle">企業級 AI 知識助理</div>
+                        <p style="color: #636e72; font-size: 0.95rem; margin-bottom: 20px;">
+                            基於 RAG 架構的企業知識庫問答系統，提升內部資訊檢索效率，支援多種文件格式解析。
+                        </p>
+                        <div class="project-tags">
+                            <span class="tech-tag">RAG / Embedding</span>
+                            <span class="tech-tag">Prompt Eng.</span>
+                            <span class="tech-tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-color-bar" style="background: #fdcb6e;"></div>
+                    <div class="project-content">
+                        <div class="project-title">票券禮贈平台</div>
+                        <div class="project-subtitle">B2B/B2C 電商系統</div>
+                        <p style="color: #636e72; font-size: 0.95rem; margin-bottom: 20px;">
+                            設計完整的電子票券購買、轉贈與核銷流程，建構高併發與可擴充的電商架構。
+                        </p>
+                        <div class="project-tags">
+                            <span class="tech-tag">E-Commerce</span>
+                            <span class="tech-tag">User Journey</span>
+                            <span class="tech-tag">System Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" style="background: white;">
+            <div class="section-header">
+                <h2>Core Competencies</h2>
+                <div class="line"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-group">
+                    <h3>🤖 AI & Tech</h3>
+                    <div class="skill-item"><span class="skill-name">Prompt Engineering</span><div class="skill-dot"></div></div>
+                    <div class="skill-item"><span class="skill-name">RAG / Embedding</span><div class="skill-dot"></div></div>
+                    <div class="skill-item"><span class="skill-name">API Integration</span><div class="skill-dot"></div></div>
+                    <div class="skill-item"><span class="skill-name">PoC Validation</span><div class="skill-dot"></div></div>
+                </div>
+                <div class="skill-group">
+                    <h3>💼 Product Management</h3>
+                    <div class="skill-item"><span class="skill-name">0-1 Product Strategy</span><div class="skill-dot" style="background: #6c5ce7;"></div></div>
+                    <div class="skill-item"><span class="skill-name">Roadmap Planning</span><div class="skill-dot" style="background: #6c5ce7;"></div></div>
+                    <div class="skill-item"><span class="skill-name">B2B Requirement Analysis</span><div class="skill-dot" style="background: #6c5ce7;"></div></div>
+                    <div class="skill-item"><span class="skill-name">Cross-functional Collab</span><div class="skill-dot" style="background: #6c5ce7;"></div></div>
+                </div>
+                <div class="skill-group">
+                    <h3>🛒 E-Commerce</h3>
+                    <div class="skill-item"><span class="skill-name">Order Flow Design</span><div class="skill-dot" style="background: #fdcb6e;"></div></div>
+                    <div class="skill-item"><span class="skill-name">Conversion Optimization</span><div class="skill-dot" style="background: #fdcb6e;"></div></div>
+                    <div class="skill-item"><span class="skill-name">CMS / CRM</span><div class="skill-dot" style="background: #fdcb6e;"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer" id="contact">
+            <div class="section-header">
+                <h2 style="color: white;">Let's Connect</h2>
+                <div class="line" style="background: rgba(255,255,255,0.3);"></div>
+            </div>
+            <div class="contact-box">
+                <p style="margin-bottom: 30px; font-size: 1.1rem; color: rgba(255,255,255,0.8);">
+                    對 AI 產品落地有興趣？或想討論潛在的合作機會？歡迎聯繫我！
+                </p>
+                <span class="contact-link" style="cursor: default; user-select: all;">
+                    📧 determination7362@gmail.com
+                </span>
+                <a href="tel:+886906040227" class="contact-link">
+                    📞 +886 906-040-227
+                </a>
+            </div>
+            <p class="copyright">© 2025 Irene Lin. Created with AI & Passion.</p>
+        </footer>
+    </div>
+
+    <div id="game-view">
+        <button class="game-close-btn" onclick="toggleGameMode(false)">❌ EXIT GAME</button>
+        <div class="game-ui">
+            IRENE'S CAREER ADVENTURE<br>
+            <span style="font-size: 0.6rem; color: #aaa;">STAGE <span id="g-stage">1</span>/3 | ACHIEVEMENTS: <span id="g-skill-count">0</span>/10</span>
+        </div>
+        <div id="achievement-toast" class="achievement-toast"></div>
+        <canvas id="gameCanvas" width="800" height="450"></canvas>
+        <div class="game-controls-hint">
+            [WASD / ARROWS] Move & Jump
+        </div>
+    </div>
+
+    <script>
+        // --- Carousel Logic ---
+        let currentSlide = 0;
+        const totalSlides = 3;
+        const autoPlayInterval = 5000;
+        let autoPlayTimer = null;
+        let progressTimer = null;
+        let progressStart = 0;
+
+        function updateCarousel() {
+            const track = document.getElementById('carouselTrack');
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            // Update dots
+            document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+
+            // Update active slide for animation
+            document.querySelectorAll('.carousel-slide').forEach((slide, i) => {
+                slide.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        function moveSlide(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            updateCarousel();
+            resetAutoPlay();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+            resetAutoPlay();
+        }
+
+        function updateProgress() {
+            const bar = document.getElementById('carouselProgress');
+            const elapsed = Date.now() - progressStart;
+            const pct = Math.min((elapsed / autoPlayInterval) * 100, 100);
+            bar.style.width = pct + '%';
+            if (pct < 100) {
+                progressTimer = requestAnimationFrame(updateProgress);
+            }
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayTimer);
+            cancelAnimationFrame(progressTimer);
+            progressStart = Date.now();
+            updateProgress();
+            autoPlayTimer = setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateCarousel();
+                progressStart = Date.now();
+            }, autoPlayInterval);
+        }
+
+        // Pause on hover
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.querySelector('.carousel');
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(autoPlayTimer);
+                cancelAnimationFrame(progressTimer);
+            });
+            carousel.addEventListener('mouseleave', resetAutoPlay);
+
+            // Touch swipe support
+            let touchStartX = 0;
+            carousel.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            carousel.addEventListener('touchend', e => {
+                const diff = touchStartX - e.changedTouches[0].screenX;
+                if (Math.abs(diff) > 50) {
+                    moveSlide(diff > 0 ? 1 : -1);
+                }
+            }, { passive: true });
+
+            resetAutoPlay();
+        });
+
+        // --- UI Logic ---
+        function toggleGameMode(active) {
+            const resume = document.getElementById('resume-view');
+            const game = document.getElementById('game-view');
+            
+            if (active) {
+                resume.style.opacity = '0';
+                setTimeout(() => {
+                    resume.style.display = 'none';
+                    game.style.display = 'flex';
+                    // Initialize Game if not already running
+                    if (!gameInstance.running) initGame();
+                    gameInstance.paused = false;
+                }, 500);
+            } else {
+                game.style.display = 'none';
+                gameInstance.paused = true;
+                resume.style.display = 'block';
+                // Trigger reflow
+                void resume.offsetWidth; 
+                resume.style.opacity = '1';
+            }
+        }
+
+        // --- Career Timeline Adventure Game Engine ---
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let gameInstance = { running: false, paused: false };
+
+        const player = { x: 50, y: 300, w: 30, h: 46, vx: 0, vy: 0, grounded: false, walkFrame: 0 };
+        const keys = {};
+        let gameCompleted = false;
+
+        // Stage definitions
+        const stages = [
+            { id: 1, name: 'STAGE 1 — 澤鈺智庫 2019', xStart: 0, xEnd: 800,
+              bgColor1: '#2d1b00', bgColor2: '#1a1a2e', platColor: '#c0855c', gateX: 800 },
+            { id: 2, name: 'STAGE 2 — 新達科技 2021', xStart: 900, xEnd: 2200,
+              bgColor1: '#0a1628', bgColor2: '#1a1a2e', platColor: '#4a90d9', gateX: 2200 },
+            { id: 3, name: 'STAGE 3 — 昕力資訊 2023', xStart: 2300, xEnd: 4000,
+              bgColor1: '#1a0a2e', bgColor2: '#1a1a2e', platColor: '#6c5ce7', gateX: 4100 }
+        ];
+
+        // 3-stage platforms
+        const platforms = [
+            // Stage 1 — 澤鈺智庫 (x: 0~800)
+            { x: 0, y: 400, w: 850, h: 50, stage: 1 },
+            { x: 150, y: 320, w: 100, h: 16, stage: 1 },
+            { x: 350, y: 280, w: 120, h: 16, stage: 1 },
+            { x: 600, y: 320, w: 100, h: 16, stage: 1 },
+            // Stage 2 — 新達科技 (x: 900~2200)
+            { x: 900, y: 400, w: 400, h: 50, stage: 2 },
+            { x: 1050, y: 310, w: 90, h: 16, stage: 2 },
+            { x: 1200, y: 250, w: 90, h: 16, stage: 2 },
+            { x: 1380, y: 400, w: 300, h: 50, stage: 2 },
+            { x: 1400, y: 310, w: 90, h: 16, stage: 2 },
+            { x: 1580, y: 260, w: 90, h: 16, stage: 2 },
+            { x: 1750, y: 400, w: 500, h: 50, stage: 2 },
+            { x: 1800, y: 320, w: 100, h: 16, stage: 2 },
+            { x: 2000, y: 280, w: 100, h: 16, stage: 2 },
+            // Stage 3 — 昕力資訊 (x: 2300~4000)
+            { x: 2300, y: 400, w: 400, h: 50, stage: 3 },
+            { x: 2420, y: 310, w: 90, h: 16, stage: 3 },
+            { x: 2600, y: 260, w: 90, h: 16, stage: 3 },
+            { x: 2780, y: 400, w: 350, h: 50, stage: 3 },
+            { x: 2850, y: 300, w: 90, h: 16, stage: 3 },
+            { x: 3030, y: 250, w: 90, h: 16, stage: 3 },
+            { x: 3200, y: 400, w: 400, h: 50, stage: 3 },
+            { x: 3250, y: 320, w: 100, h: 16, stage: 3 },
+            { x: 3450, y: 270, w: 100, h: 16, stage: 3 },
+            { x: 3650, y: 400, w: 500, h: 50, stage: 3 },
+            { x: 3700, y: 310, w: 100, h: 16, stage: 3 },
+            { x: 3900, y: 260, w: 100, h: 16, stage: 3 },
+        ];
+
+        // 10 collectibles with achievement descriptions
+        const skills = [
+            // Stage 1
+            { x: 190, y: 280, collected: false, name: '商業溝通', stage: 1,
+              achievement: '跨產業商業溝通與客戶需求分析' },
+            { x: 640, y: 280, collected: false, name: '跨產業視野', stage: 1,
+              achievement: '橫跨製造、金融、零售的產業洞察' },
+            // Stage 2
+            { x: 1080, y: 270, collected: false, name: '7+ 專案交付', stage: 2,
+              achievement: '獨立負責 7+ 客製化企業專案交付' },
+            { x: 1430, y: 270, collected: false, name: '風險管理', stage: 2,
+              achievement: '建立專案風險預警與品質管控機制' },
+            { x: 1840, y: 280, collected: false, name: 'Scrum 敏捷', stage: 2,
+              achievement: '導入 Scrum 敏捷開發流程與迭代管理' },
+            // Stage 3
+            { x: 2460, y: 270, collected: false, name: 'SysTalk.Audit', stage: 3,
+              achievement: '主導 SysTalk.Audit AI 稽核產品策略' },
+            { x: 2640, y: 220, collected: false, name: '5+ PoC', stage: 3,
+              achievement: '一年內推進 15+ 企業金融 PoC' },
+            { x: 2890, y: 260, collected: false, name: 'RAG / LLM', stage: 3,
+              achievement: '主導 RAG 架構優化與知識檢索' },
+            { x: 3290, y: 280, collected: false, name: 'Prompt Eng.', stage: 3,
+              achievement: '設計 Prompt Engineering 框架提升回覆品質' },
+            { x: 3740, y: 270, collected: false, name: 'Product Strategy', stage: 3,
+              achievement: '制定 AI 產品策略與商業化路徑' },
+        ];
+
+        let cameraX = 0;
+        let currentStage = 1;
+        let achievementQueue = [];
+        let achievementTimer = null;
+        let stageTitle = { text: '', alpha: 0, timer: 0 };
+
+        function showAchievement(text) {
+            achievementQueue.push(text);
+            if (!achievementTimer) processAchievementQueue();
+        }
+
+        function processAchievementQueue() {
+            if (achievementQueue.length === 0) { achievementTimer = null; return; }
+            const text = achievementQueue.shift();
+            const toast = document.getElementById('achievement-toast');
+            toast.innerHTML = '🏆 Achievement Unlocked:<br>' + text;
+            toast.classList.add('show');
+            achievementTimer = setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => processAchievementQueue(), 400);
+            }, 3000);
+        }
+
+        function showStageTitle(text) {
+            stageTitle = { text, alpha: 1.0, timer: 120 };
+        }
+
+        function getStageAt(x) {
+            for (const s of stages) {
+                if (x >= s.xStart && x <= s.xEnd) return s;
+            }
+            // Between stages or past end
+            if (x > 4000) return stages[2];
+            return stages[0];
+        }
+
+        function getStageBgColor(x) {
+            const warmR = [45, 26, 0], warmG = [27, 26, 0], warmB = [0, 46, 0];
+            const blueR = [10, 22, 40], blueG = [22, 26, 40], blueB = [40, 46, 40];
+            const purpR = [26, 10, 46], purpG = [10, 26, 46], purpB = [46, 46, 46];
+
+            if (x <= 800) {
+                return '#2d1b00';
+            } else if (x <= 900) {
+                const t = (x - 800) / 100;
+                const r = Math.round(45 + (10 - 45) * t);
+                const g = Math.round(27 + (22 - 27) * t);
+                const b = Math.round(0 + (40 - 0) * t);
+                return `rgb(${r},${g},${b})`;
+            } else if (x <= 2200) {
+                return '#0a1628';
+            } else if (x <= 2300) {
+                const t = (x - 2200) / 100;
+                const r = Math.round(10 + (26 - 10) * t);
+                const g = Math.round(22 + (10 - 22) * t);
+                const b = Math.round(40 + (46 - 40) * t);
+                return `rgb(${r},${g},${b})`;
+            } else {
+                return '#1a0a2e';
+            }
+        }
+
+        function initGame() {
+            gameInstance.running = true;
+            gameCompleted = false;
+            player.x = 50; player.y = 300; player.vx = 0; player.vy = 0;
+            skills.forEach(s => s.collected = false);
+            currentStage = 1;
+            document.getElementById('g-skill-count').innerText = '0';
+            document.getElementById('g-stage').innerText = '1';
+            showStageTitle('STAGE 1 — 澤鈺智庫 2019');
+            window.addEventListener('keydown', e => { keys[e.code] = true; if (['Space','ArrowUp','ArrowDown'].includes(e.code)) e.preventDefault(); });
+            window.addEventListener('keyup', e => keys[e.code] = false);
+            gameLoop();
+        }
+
+        function resetGame() {
+            gameCompleted = false;
+            player.x = 50; player.y = 300; player.vx = 0; player.vy = 0;
+            skills.forEach(s => s.collected = false);
+            currentStage = 1;
+            document.getElementById('g-skill-count').innerText = '0';
+            document.getElementById('g-stage').innerText = '1';
+            showStageTitle('STAGE 1 — 澤鈺智庫 2019');
+        }
+
+        function gameLoop() {
+            if (!gameInstance.paused) {
+                if (!gameCompleted) update();
+                draw();
+            }
+            requestAnimationFrame(gameLoop);
+        }
+
+        function update() {
+            // Horizontal Move
+            if (keys['ArrowRight'] || keys['KeyD']) { player.vx = 5; player.walkFrame += 0.15; }
+            else if (keys['ArrowLeft'] || keys['KeyA']) { player.vx = -5; player.walkFrame += 0.15; }
+            else { player.vx *= 0.8; player.walkFrame = 0; }
+
+            // Jump
+            if ((keys['Space'] || keys['ArrowUp'] || keys['KeyW']) && player.grounded) {
+                player.vy = -12;
+                player.grounded = false;
+            }
+
+            // Physics
+            player.vy += 0.6;
+            player.x += player.vx;
+            player.y += player.vy;
+
+            // Prevent going left of start
+            if (player.x < 0) player.x = 0;
+
+            // Collision
+            player.grounded = false;
+            platforms.forEach(p => {
+                if (player.x + player.w > p.x && player.x < p.x + p.w &&
+                    player.y + player.h > p.y && player.y + player.h < p.y + p.h + 20 &&
+                    player.vy >= 0) {
+                    player.y = p.y - player.h;
+                    player.vy = 0;
+                    player.grounded = true;
+                }
+            });
+
+            // Fall reset
+            if (player.y > 600) { player.x = cameraX + 50; player.y = 300; player.vy = 0; }
+
+            // Skill Collection
+            skills.forEach(s => {
+                if (!s.collected &&
+                    player.x < s.x + 20 && player.x + player.w > s.x &&
+                    player.y < s.y + 20 && player.y + player.h > s.y) {
+                    s.collected = true;
+                    const count = skills.filter(sk => sk.collected).length;
+                    document.getElementById('g-skill-count').innerText = count;
+                    showAchievement(s.achievement);
+                }
+            });
+
+            // Stage detection
+            const stage = getStageAt(player.x);
+            if (stage.id !== currentStage) {
+                currentStage = stage.id;
+                document.getElementById('g-stage').innerText = currentStage;
+                showStageTitle(stage.name);
+            }
+
+            // Stage title fade
+            if (stageTitle.timer > 0) {
+                stageTitle.timer--;
+                if (stageTitle.timer < 30) stageTitle.alpha = stageTitle.timer / 30;
+            }
+
+            // End game check
+            if (player.x >= 4100) {
+                gameCompleted = true;
+            }
+
+            // Camera
+            cameraX = player.x - 300;
+        }
+
+        function drawDiamond(cx, cy, size) {
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - size);
+            ctx.lineTo(cx + size, cy);
+            ctx.lineTo(cx, cy + size);
+            ctx.lineTo(cx - size, cy);
+            ctx.closePath();
+        }
+
+        function drawGate(x) {
+            // Flag pole
+            ctx.fillStyle = '#aaa';
+            ctx.fillRect(x - 2, 320, 4, 80);
+            // Flag
+            ctx.fillStyle = '#ffd700';
+            ctx.beginPath();
+            ctx.moveTo(x + 2, 320);
+            ctx.lineTo(x + 35, 335);
+            ctx.lineTo(x + 2, 350);
+            ctx.closePath();
+            ctx.fill();
+            // Gate arch
+            ctx.strokeStyle = 'rgba(255,215,0,0.4)';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(x, 400, 50, Math.PI, 0);
+            ctx.stroke();
+        }
+
+        function drawEndScreen() {
+            ctx.fillStyle = 'rgba(15, 15, 35, 0.95)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Title
+            ctx.fillStyle = '#ffd700';
+            ctx.font = "bold 18px 'Press Start 2P', monospace";
+            ctx.textAlign = 'center';
+            ctx.fillText('CAREER JOURNEY', canvas.width / 2, 50);
+            ctx.fillText('COMPLETE!', canvas.width / 2, 78);
+
+            // Collected achievements
+            const collected = skills.filter(s => s.collected);
+            ctx.font = "9px 'Press Start 2P', monospace";
+            ctx.fillStyle = '#aaa';
+            ctx.fillText(`ACHIEVEMENTS: ${collected.length}/10`, canvas.width / 2, 110);
+
+            ctx.font = "11px 'Noto Sans TC', sans-serif";
+            ctx.textAlign = 'left';
+            const startY = 135;
+            const col1X = 60, col2X = 430;
+            collected.forEach((s, i) => {
+                const col = i < 5 ? col1X : col2X;
+                const row = i < 5 ? i : i - 5;
+                const y = startY + row * 28;
+                ctx.fillStyle = '#ffd700';
+                ctx.fillText('🏆', col, y);
+                ctx.fillStyle = '#ddd';
+                ctx.fillText(s.name + ' — ' + s.achievement, col + 22, y);
+            });
+
+            // Mission statement
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#6c5ce7';
+            ctx.font = "bold 12px 'Press Start 2P', monospace";
+            ctx.fillText('AI Product Lead', canvas.width / 2, 330);
+            ctx.font = "10px 'Press Start 2P', monospace";
+            ctx.fillStyle = '#a29bfe';
+            ctx.fillText('Bridging Tech & Business', canvas.width / 2, 355);
+
+            // Back button
+            const btnW = 260, btnH = 40;
+            const btnX = (canvas.width - btnW) / 2, btnY = 385;
+            ctx.fillStyle = '#6c5ce7';
+            ctx.fillRect(btnX, btnY, btnW, btnH);
+            ctx.fillStyle = '#fff';
+            ctx.font = "10px 'Press Start 2P', monospace";
+            ctx.fillText('BACK TO RESUME', canvas.width / 2, btnY + 26);
+
+            // Click handler for back button
+            canvas.onclick = function(e) {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                const mx = (e.clientX - rect.left) * scaleX;
+                const my = (e.clientY - rect.top) * scaleY;
+                if (mx >= btnX && mx <= btnX + btnW && my >= btnY && my <= btnY + btnH) {
+                    canvas.onclick = null;
+                    toggleGameMode(false);
+                    resetGame();
+                }
+            };
+        }
+
+        function draw() {
+            if (gameCompleted) { drawEndScreen(); return; }
+
+            // Stage-aware background
+            const bgColor = getStageBgColor(player.x);
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.save();
+            ctx.translate(-cameraX, 0);
+
+            // Draw gates/flags between stages
+            drawGate(850);
+            drawGate(2250);
+            drawGate(4100);
+
+            // Platforms with stage colors
+            platforms.forEach(p => {
+                const stage = stages.find(s => s.id === p.stage);
+                ctx.fillStyle = stage ? stage.platColor : '#6c5ce7';
+                ctx.fillRect(p.x, p.y, p.w, p.h);
+                // Platform top highlight
+                ctx.fillStyle = 'rgba(255,255,255,0.1)';
+                ctx.fillRect(p.x, p.y, p.w, 3);
+            });
+
+            // Collectibles — diamond shape with label
+            skills.forEach(s => {
+                if (!s.collected) {
+                    const cx = s.x + 10, cy = s.y + 10;
+                    // Glow
+                    ctx.shadowColor = '#ffd700';
+                    ctx.shadowBlur = 18;
+                    // Diamond (larger)
+                    ctx.fillStyle = '#ffd700';
+                    drawDiamond(cx, cy, 14);
+                    ctx.fill();
+                    // Border
+                    ctx.strokeStyle = '#fff';
+                    ctx.lineWidth = 2.5;
+                    drawDiamond(cx, cy, 14);
+                    ctx.stroke();
+                    ctx.shadowBlur = 0;
+                    // Label (larger font + better badge)
+                    ctx.font = "bold 13px 'Noto Sans TC', sans-serif";
+                    ctx.textAlign = 'center';
+                    const textW = ctx.measureText(s.name).width;
+                    const badgeX = cx - textW / 2 - 8;
+                    const badgeY = cy - 34;
+                    const badgeW = textW + 16;
+                    const badgeH = 22;
+                    // Badge background
+                    ctx.fillStyle = 'rgba(0,0,0,0.75)';
+                    ctx.beginPath();
+                    ctx.roundRect(badgeX, badgeY, badgeW, badgeH, 6);
+                    ctx.fill();
+                    // Badge border
+                    ctx.strokeStyle = 'rgba(255,215,0,0.6)';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.roundRect(badgeX, badgeY, badgeW, badgeH, 6);
+                    ctx.stroke();
+                    // Text
+                    ctx.fillStyle = '#ffd700';
+                    ctx.fillText(s.name, cx, cy - 17);
+                    ctx.textAlign = 'left';
+                }
+            });
+
+            // Player with walk animation
+            const wobble = Math.sin(player.walkFrame * 4) * 2;
+            const px = player.x, py = player.y;
+
+            // Body
+            ctx.fillStyle = '#00b894';
+            ctx.fillRect(px + (player.grounded ? wobble : 0), py, player.w, player.h);
+
+            // Eyes
+            ctx.fillStyle = '#fff';
+            const eyeX = player.vx > 0.5 ? 18 : (player.vx < -0.5 ? 4 : 11);
+            ctx.fillRect(px + eyeX + (player.grounded ? wobble : 0), py + 10, 5, 5);
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(px + eyeX + 1 + (player.grounded ? wobble : 0), py + 12, 3, 3);
+
+            // Legs animation
+            if (Math.abs(player.vx) > 1 && player.grounded) {
+                const legOffset = Math.sin(player.walkFrame * 6) * 4;
+                ctx.fillStyle = '#009b7d';
+                ctx.fillRect(px + 6 + wobble, py + player.h, 6, 4 + legOffset);
+                ctx.fillRect(px + 18 + wobble, py + player.h, 6, 4 - legOffset);
+            }
+
+            ctx.restore();
+
+            // Stage title overlay
+            if (stageTitle.timer > 0 && stageTitle.alpha > 0) {
+                ctx.save();
+                ctx.globalAlpha = stageTitle.alpha;
+                ctx.fillStyle = '#ffd700';
+                ctx.font = "bold 14px 'Press Start 2P', monospace";
+                ctx.textAlign = 'center';
+                ctx.fillText(stageTitle.text, canvas.width / 2, 40);
+                ctx.restore();
+                ctx.textAlign = 'left';
+            }
+        }
+
+    </script>
+</body>
+</html>
